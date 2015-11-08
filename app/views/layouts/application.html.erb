@@ -19,23 +19,33 @@
         </button>
         <a class="navbar-brand" href="/">Blocitoff</a>
       </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          Hi, <%= current_user.name %>! <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="container">
     <% if flash[:notice] %>
       <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <% flash[:notice] %>
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <%= flash[:notice] %>
       </div>
     <% elsif flash[:error] %>
       <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <% flash[:error] %>
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <%= flash[:error] %>
       </div>
     <% elsif flash[:alert] %>
       <div class="alert alert-dismissible alert-info">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <% flash[:alert] %>
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <%= flash[:alert] %>
       </div>
     <% end %>
   </div>

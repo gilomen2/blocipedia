@@ -1,29 +1,46 @@
-<h2>Sign up</h2>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Sign Up</h2>
+    <div class="well">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="<%= resource.errors[:name].present? ? 'form-group has-error' : 'form-group' %>">
+          <%= f.label :name, class: 'col-lg-2 control-label' %>
+          <div class="col-lg-10">
+            <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="<%= resource.errors[:email].present? ? 'form-group has-error' : 'form-group' %>">
+          <%= f.label :email, class: 'col-lg-2 control-label' %>
+          <div class="col-lg-10">
+            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="<%= resource.errors[:password].present? ? 'form-group has-error' : 'form-group' %>">
+          <%= f.label :password, class: 'col-lg-2 control-label' %>
+          <div class="col-lg-10">
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            <% if @minimum_password_length %>
+              <em><small>(<%= @minimum_password_length %> characters minimum)</small></em>
+            <% end %>
+          </div>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+        <div class="<%= resource.errors[:password_confirmation].present? ? 'form-group has-error' : 'form-group' %>">
+          <%= f.label :password_confirmation, class: 'col-lg-2 control-label' %>
+          <div class="col-lg-10">
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+        <div class="actions form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <%= f.submit "Sign up", class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
