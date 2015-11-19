@@ -13,6 +13,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # DELETE /avatar/:user_id
+  def remove_avatar
+    @user = User.find(params[:user_id])
+    @user.remove_avatar!
+    @user.save
+    flash[:notice] = "Avatar successfully removed"
+    redirect_to edit_user_registration_path
+  end
+
   private
 
   def user_params
