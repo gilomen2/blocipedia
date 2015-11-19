@@ -33,3 +33,5 @@
 
 # sftp configuration file
 sftp-config.json
+
+/public/uploads
