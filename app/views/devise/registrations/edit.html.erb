@@ -53,7 +53,7 @@
             </div>
           <span id="fileselector">
             <label class="btn btn-default" for="avatar-upload-file-selector">
-            <%= f.file_field :avatar, class: 'form-control', :id => "avatar-upload-file-selector" %><i class="fa_icon icon-upload-alt margin-correction"></i>
+            <%= f.file_field :avatar, class: 'form-control', :id => "avatar-upload-file-selector" %><i class="fa fa-upload margin-correction"></i>
             <% if current_user.avatar? %>
               Change Avatar
             <% else %>
