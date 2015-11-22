@@ -13,8 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+/*
+ *= require froala_editor.min.css
+ *= require froala_style.min.css
+ *= require font-awesome
+ */
+
 @import "bootstrap-sprockets";
-@import url("http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
+@import "font-awesome";
 
 .t-20{
   padding-top: 20px;
