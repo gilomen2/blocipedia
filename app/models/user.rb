@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   validates :name, :presence => true
 
+  has_many :wikis
+
   mount_uploader :avatar, AvatarUploader
 end

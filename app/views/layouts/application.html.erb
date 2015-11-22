@@ -18,10 +18,15 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">Blocipedia</a>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "All Wikis", wikis_path %></li>
+
+        </ul>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
+          <li><%= link_to "Add Wiki", new_wiki_path %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               <% if current_user.avatar? %>
