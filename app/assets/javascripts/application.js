@@ -15,3 +15,20 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//
+$(window).load(function(){
+  $('input[type="file"]').change(function(){
+    var file = this.files[0];
+    function truncate(n, len) {
+      var ext = n.substring(n.lastIndexOf(".") + 1, n.length).toLowerCase();
+      var filename = n.replace('.'+ext,'');
+      if(filename.length <= len) {
+          return n;
+      }
+      filename = filename.substr(0, len) + (n.length > len ? '[...]' : '');
+      return filename + '.' + ext;
+  };
+  var shortName = truncate(file.name, 4)
+  $("#avatar-img").html(shortName);
+  });
+});

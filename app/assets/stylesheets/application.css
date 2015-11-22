@@ -14,8 +14,28 @@
  *= require_self
  */
 @import "bootstrap-sprockets";
-
+@import url("http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css");
 
 .t-20{
   padding-top: 20px;
+}
+
+#avatar-img {
+    min-width: 85px;
+    display: inline-block;
+    text-align: center;
+}
+
+
+/*
+    FORM STYLING
+*/
+#fileselector {
+/*    margin: 10px;*/
+}
+#upload-file-selector {
+    display:none;
+}
+.margin-correction {
+    margin-right: 10px;
 }

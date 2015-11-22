@@ -1,39 +1,91 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Edit <%= resource_name.to_s.humanize %></h2>
+    <div class="well">
+       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :class => 'form-horizontal' }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="<%= resource.errors[:name].present? ? 'form-group has-error' : 'form-group' %>">
+        <%= f.label :name, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+          <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="<%= resource.errors[:email].present? ? 'form-group has-error' : 'form-group' %>">
+        <%= f.label :email, class: 'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+          <%= f.email_field :email, class: 'form-control'%>
+        </div>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+      <div class="<%= resource.errors[:password].present? ? 'form-group has-error' : 'form-group' %>">
+          <%= f.label :password, 'New Password', class: 'col-lg-2 control-label' %>
+          <div class="col-lg-10">
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            <% if @minimum_password_length %>
+              <em><small>(<%= @minimum_password_length %> characters minimum)</small></em>
+            <% else %>
+              <em><small>(leave blank if you don't want to change it)</small></em>
+            <% end %>
+          </div>
+      </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="<%= resource.errors[:password_confirmation].present? ? 'form-group has-error' : 'form-group' %>">
+          <%= f.label :password_confirmation, "Confirm Password", class: 'col-lg-2 control-label' %>
+          <div class="col-lg-10">
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+      <div class="<%= resource.errors[:avatar].present? ? 'form-group has-error' : 'form-group' %>">
+        <%= f.label :avatar, "Avatar", class: 'col-lg-2 control-label' %>
+        <div class="col-lg-10">
+            <div id="avatar-img">
+              <% if current_user.avatar? %>
+                <%= image_tag( current_user.avatar.profile.url) %>
+              <% end %>
+            </div>
+          <span id="fileselector">
+            <label class="btn btn-default" for="upload-file-selector">
+            <%= f.file_field :avatar, class: 'form-control', :id => "upload-file-selector" %><i class="fa_icon icon-upload-alt margin-correction"></i>
+            <% if current_user.avatar? %>
+              Change Avatar
+            <% else %>
+              Upload Avatar
+            <% end %>
+            <%= f.hidden_field :avatar_cache %>
+          </span>
+          <% if current_user.avatar? %>
+          <%= link_to 'Remove Avatar', remove_avatar_path(current_user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="<%= resource.errors[:current_password].present? ? 'form-group has-error' : 'form-group' %>">
+          <%= f.label :current_password, "Current Password", class: 'col-lg-2 control-label' %>
+          <div class="col-lg-10">
+            <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+            <em><small>(we need your current password to confirm your changes)</small></em>
+          </div>
+      </div>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+      <div class="actions">
+        <%= f.submit "Update", class: 'btn btn-primary' %>
+      </div>
 
-<%= link_to "Back", :back %>
+
+    </div>
+    <% end %>
+
+    <h3>Unhappy?</h3>
+
+    <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
+
+
+

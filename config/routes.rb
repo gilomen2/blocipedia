@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => :registrations }
   get 'welcome/index'
 
   root :to => "welcome#index"
+
+  delete 'avatar/:user_id' => 'users#remove_avatar', as: :remove_avatar
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
