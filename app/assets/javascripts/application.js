@@ -17,7 +17,7 @@
 //= require bootstrap-sprockets
 //
 $(window).load(function(){
-  $('input[type="file"]').change(function(){
+  $('input[type="file"]#avatar-upload-file-selector').change(function(){
     var file = this.files[0];
     function truncate(n, len) {
       var ext = n.substring(n.lastIndexOf(".") + 1, n.length).toLowerCase();
