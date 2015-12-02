@@ -16,7 +16,7 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //
-$(window).load(function(){
+$(document).ready(function(){
   $('input[type="file"]#avatar-upload-file-selector').change(function(){
     var file = this.files[0];
     function truncate(n, len) {
@@ -30,5 +30,8 @@ $(window).load(function(){
   };
   var shortName = truncate(file.name, 4)
   $("#avatar-img").html(shortName);
+  });
+  $(function() {
+    $('#wysiwyg-editor').froalaEditor()
   });
 });
