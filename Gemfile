@@ -20,6 +20,8 @@ end
 gem 'sass-rails', '~> 5.0'
 # Use Twitter Bootstrap
 gem 'bootstrap-sass'
+gem 'font-awesome-rails', '~> 4.4.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
