@@ -20,7 +20,7 @@
  */
 
 @import "bootstrap-sprockets";
-@import "../font-awesome.css";
+@import "font-awesome.css";
 
 .t-20{
   padding-top: 20px;
