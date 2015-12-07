@@ -15,12 +15,10 @@
  */
 
 /*
- *= require froala_editor.min.css
- *= require froala_style.min.css
+ *= require font-awesome
  */
 
 @import "bootstrap-sprockets";
-@import "font-awesome.css";
 
 .t-20{
   padding-top: 20px;

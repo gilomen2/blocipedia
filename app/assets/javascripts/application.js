@@ -31,7 +31,4 @@ $(document).ready(function(){
   var shortName = truncate(file.name, 4)
   $("#avatar-img").html(shortName);
   });
-  $(function() {
-    $('#wysiwyg-editor').froalaEditor()
-  });
 });
