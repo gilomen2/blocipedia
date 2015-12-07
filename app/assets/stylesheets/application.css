@@ -18,7 +18,12 @@
  *= require font-awesome
  */
 
+/*
+ *= require summernote
+ */
+
 @import "bootstrap-sprockets";
+
 
 .t-20{
   padding-top: 20px;
@@ -42,4 +47,7 @@
 }
 .margin-correction {
     margin-right: 10px;
+}
+.checkbox-label {
+    margin-left: 5px;
 }

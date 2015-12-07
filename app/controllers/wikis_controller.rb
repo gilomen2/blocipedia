@@ -17,7 +17,7 @@ class WikisController < ApplicationController
       flash[:notice] = "Your new Wiki was saved."
       redirect_to @wiki
     else
-      flash[:error] = "Theree was a problem saving the Wiki. Please try again."
+      flash[:error] = "There was a problem saving the Wiki. Please try again."
     end
   end
 

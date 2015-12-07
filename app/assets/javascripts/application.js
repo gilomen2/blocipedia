@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require summernote
 //
 $(document).ready(function(){
   $('input[type="file"]#avatar-upload-file-selector').change(function(){
@@ -30,5 +31,9 @@ $(document).ready(function(){
   };
   var shortName = truncate(file.name, 4)
   $("#avatar-img").html(shortName);
+  });
+  $('#summernote').summernote({
+    height: 300,
+    minHeight: 300
   });
 });
