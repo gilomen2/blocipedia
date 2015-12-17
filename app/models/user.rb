@@ -6,6 +6,23 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
 
   has_many :wikis
+  after_initialize :set_role
+
+  def set_role
+    self.role ||= 'standard'
+  end
+
+  def standard?
+    role == 'standard'
+  end
+
+  def premium?
+    role == 'premium'
+  end
+
+  def admin?
+    role == 'admin'
+  end
 
   mount_uploader :avatar, AvatarUploader
 end
