@@ -51,6 +51,8 @@ gem 'mini_magick'
 
 gem 'fog'
 
+gem 'faker'
+
 
 
 # Use ActiveModel has_secure_password
