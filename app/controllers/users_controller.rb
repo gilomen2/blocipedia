@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path
   end
 
-  #PUT /account/:user_id
+  #PUT /users/:user_id
   def upgrade_account
     @user = User.find(params[:user_id])
     if @user.standard?
@@ -36,6 +36,19 @@ class UsersController < ApplicationController
     end
   end
 
+  #PUT /users/:user_id
+  def downgrade_account
+    @user = User.find(params[:user_id])
+    if @user.premium?
+      @user.role = 'standard'
+      @user.save
+      flash[:notice] = "Account successfully downgraded"
+      redirect_to edit_user_registration_path
+    else
+      flash[:error] = "You cannot downgrade this type of account"
+      redirect_to edit_user_registration_path
+    end
+  end
 
   private
 

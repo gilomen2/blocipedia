@@ -85,9 +85,11 @@
     <h3>Change Your Account</h3>
     <% if current_user.standard? %>
       <%= link_to 'Upgrade Account', upgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+    <% elsif current_user.premium? %>
+      <%= link_to 'Downgrade Account', downgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
     <% end %>
 
-    <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
+    <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
 
 
 
