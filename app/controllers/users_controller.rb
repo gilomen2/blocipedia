@@ -50,6 +50,33 @@ class UsersController < ApplicationController
     end
   end
 
+  def new_charge
+
+  end
+
+  def create_charge
+    # Amount in cents
+    @amount = 1500
+
+    customer = Stripe::Customer.create(
+      :email       =>    params[:stripeEmail],
+      :source      =>    params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+      :customer    =>    customer.id,
+      :amount      =>    @amount,
+      :description =>    'Blocipedia Premium Customer',
+      :currency    =>    'usd'
+    )
+
+    current_user.upgrade_account
+
+  rescue Stripe::CardError => e
+    flash[:Error] = e.message
+    redirect_to new_charge_path
+  end
+
   private
 
   def user_params

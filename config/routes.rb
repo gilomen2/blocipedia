@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   put 'users/downgrade/:user_id' => 'users#downgrade_account', as: :downgrade_account
 
+  post 'charges/create_charge' => 'users#create_charge', as: :create_charge
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

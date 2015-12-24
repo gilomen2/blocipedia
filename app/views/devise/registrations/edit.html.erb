@@ -84,7 +84,12 @@
     <% end %>
     <h3>Change Your Account</h3>
     <% if current_user.standard? %>
-      <%= link_to 'Upgrade Account', upgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-description="Premium membership"
+      data-amount="1500"
+      data-locale="auto"
+      data-label="Upgrade Account"></script>
     <% elsif current_user.premium? %>
       <%= link_to 'Downgrade Account', downgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
     <% end %>
