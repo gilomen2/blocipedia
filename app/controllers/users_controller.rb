@@ -22,6 +22,21 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path
   end
 
+  #PUT /account/:user_id
+  def upgrade_account
+    @user = User.find(params[:user_id])
+    if @user.standard?
+      @user.role = 'premium'
+      @user.save
+      flash[:notice] = "Account successfully upgraded"
+      redirect_to edit_user_registration_path
+    else
+      flash[:error] = "You cannot upgrade this type of account"
+      redirect_to edit_user_registration_path
+    end
+  end
+
+
   private
 
   def user_params

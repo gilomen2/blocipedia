@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   delete 'avatar/:user_id' => 'users#remove_avatar', as: :remove_avatar
 
+  put 'users/:user_id' => 'users#upgrade_account', as: :upgrade_account
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
