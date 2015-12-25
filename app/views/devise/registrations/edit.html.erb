@@ -84,12 +84,33 @@
     <% end %>
     <h3>Change Your Account</h3>
     <% if current_user.standard? %>
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-      data-description="Premium membership"
-      data-amount="1500"
-      data-locale="auto"
-      data-label="Upgrade Account"></script>
+        <%= form_tag charges_path, id: 'upgrade-button' do %>
+          <script src="https://checkout.stripe.com/checkout.js"
+          = hidden_field_tag 'stripeToken'
+          = hidden_field_tag 'stripeEmail'></script>
+          <button id="custom-button" class="btn btn-primary">Upgrade Account</button>
+
+           <script>
+              var handler = StripeCheckout.configure({
+              key: '<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>',
+              token: function(response) {
+                var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
+                var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
+                $("form").append(tokenInput).append(emailInput).submit();
+              }
+                });
+
+              document.getElementById('custom-button').addEventListener('click', function(e) {
+                // Open Checkout with further options
+                handler.open({
+                  name: 'Blocipedia',
+                  description: 'Premium Membership',
+                  amount: 1500
+                });
+                e.preventDefault();
+              });
+          </script>
+        <% end %>
     <% elsif current_user.premium? %>
       <%= link_to 'Downgrade Account', downgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
     <% end %>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :wikis
+  resources :charges
 
   devise_for :users, :controllers => { :registrations => :registrations }
   get 'welcome/index'
@@ -10,9 +11,7 @@ Rails.application.routes.draw do
 
   put 'users/upgrade/:user_id' => 'users#upgrade_account', as: :upgrade_account
 
-  put 'users/downgrade/:user_id' => 'users#downgrade_account', as: :downgrade_account
-
-  post 'charges/create_charge' => 'users#create_charge', as: :create_charge
+  put 'charges/downgrade/:user_id' => 'charges#downgrade_account', as: :downgrade_account
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
