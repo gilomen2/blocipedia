@@ -37,18 +37,6 @@ class ChargesController < ApplicationController
     end
   end
 
-  def downgrade_account
-    @user = current_user
-    if @user.premium?
-      @user.role = 'standard'
-      @user.save
-      flash[:notice] = "Account successfully downgraded"
-      redirect_to edit_user_registration_path
-    else
-      flash[:error] = "You cannot downgrade this type of account"
-      redirect_to edit_user_registration_path
-    end
-  end
 
 
 end

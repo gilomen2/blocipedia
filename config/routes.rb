@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :wikis
   resources :charges
 
+
   devise_for :users, :controllers => { :registrations => :registrations }
   get 'welcome/index'
 
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
 
   delete 'avatar/:user_id' => 'users#remove_avatar', as: :remove_avatar
 
-  put 'charges/downgrade/:user_id' => 'charges#downgrade_account', as: :downgrade_account
+  put 'users/downgrade/:user_id' => 'users#downgrade_account', as: :downgrade_account
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
