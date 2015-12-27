@@ -117,11 +117,6 @@
 
     <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
 
-<h3>Private Wikis</h3>
-  <% @user_wikis.each do |wiki| %>
-    <h5><%= link_to wiki.title, wiki %></h3>
-  <% end %>
-
 
 
 
