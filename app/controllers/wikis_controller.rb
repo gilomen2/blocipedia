@@ -1,11 +1,13 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user).paginate(page: params[:page], per_page: 20)
     authorize @wikis
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    @current_user = current_user
+    authorize @wiki
   end
 
   def new
