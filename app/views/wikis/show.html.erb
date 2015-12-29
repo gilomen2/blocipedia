@@ -3,7 +3,7 @@
   <p><em>Created by: <%= @wiki.user.name %></em></p>
 
 
-  <p><%= @wiki.body.html_safe %></p>
+  <p><%= markdown_to_html @wiki.body %></p>
 </div>
 <div class="col-md-4">
   <h3>Wiki Tools</h3>

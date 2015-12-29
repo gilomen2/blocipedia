@@ -56,9 +56,9 @@ gem 'faker'
 
 gem 'stripe'
 
-gem 'will_paginate-bootstrap'
+gem 'redcarpet'
 
-gem 'tinymce-rails'
+gem 'will_paginate-bootstrap'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
