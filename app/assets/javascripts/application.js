@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require tinymce
+
 //
 $(document).ready(function(){
   $('input[type="file"]#avatar-upload-file-selector').change(function(){
@@ -31,4 +33,12 @@ $(document).ready(function(){
   var shortName = truncate(file.name, 4)
   $("#avatar-img").html(shortName);
   });
+});
+
+tinyMCE.init({
+  selector: 'textarea.tinymce',
+  plugins: ['image link code codesample textcolor table autoresize'],
+  toolbar1: 'styleselect | bold italic | forecolor backcolor | undo redo | image | link | table | codesample | code',
+  autoresize_max_height: 800,
+  autoresize_min_height: 250
 });
