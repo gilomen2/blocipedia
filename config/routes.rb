@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :wikis
+  resources :charges
+
 
   devise_for :users, :controllers => { :registrations => :registrations }
   get 'welcome/index'
@@ -7,8 +9,6 @@ Rails.application.routes.draw do
   root :to => "welcome#index"
 
   delete 'avatar/:user_id' => 'users#remove_avatar', as: :remove_avatar
-
-  put 'users/upgrade/:user_id' => 'users#upgrade_account', as: :upgrade_account
 
   put 'users/downgrade/:user_id' => 'users#downgrade_account', as: :downgrade_account
 

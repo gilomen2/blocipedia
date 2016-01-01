@@ -43,3 +43,7 @@
 .margin-correction {
     margin-right: 10px;
 }
+
+#upgrade-button {
+  display: inline;
+}

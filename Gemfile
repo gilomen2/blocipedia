@@ -13,6 +13,7 @@ group :development do
   gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'quiet_assets'
 end
 
 
@@ -53,8 +54,9 @@ gem 'fog'
 
 gem 'faker'
 
+gem 'stripe'
 
-
+gem 'will_paginate-bootstrap'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+
   # DELETE /avatar/:user_id
   def remove_avatar
     @user = User.find(params[:user_id])
@@ -22,25 +23,12 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path
   end
 
-  #PUT /users/:user_id
-  def upgrade_account
-    @user = User.find(params[:user_id])
-    if @user.standard?
-      @user.role = 'premium'
-      @user.save
-      flash[:notice] = "Account successfully upgraded"
-      redirect_to edit_user_registration_path
-    else
-      flash[:error] = "You cannot upgrade this type of account"
-      redirect_to edit_user_registration_path
-    end
-  end
-
-  #PUT /users/:user_id
   def downgrade_account
-    @user = User.find(params[:user_id])
+    @user = current_user
+    @private_wikis = Wiki.private_wikis(current_user)
     if @user.premium?
       @user.role = 'standard'
+      @private_wikis.update_all(private: false)
       @user.save
       flash[:notice] = "Account successfully downgraded"
       redirect_to edit_user_registration_path
@@ -49,6 +37,8 @@ class UsersController < ApplicationController
       redirect_to edit_user_registration_path
     end
   end
+
+
 
   private
 

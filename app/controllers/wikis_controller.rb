@@ -1,15 +1,18 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user).paginate(page: params[:page], per_page: 20)
     authorize @wikis
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    @current_user = current_user
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    @user = current_user
     authorize @wiki
   end
 
@@ -17,16 +20,23 @@ class WikisController < ApplicationController
     @wiki = Wiki.new(params.required(:wiki).permit(:title, :body, :private))
     @wiki.user = current_user
     authorize @wiki
-    if @wiki.save
-      flash[:notice] = "Your new Wiki was saved."
-      redirect_to @wiki
+    if @wiki.valid?
+      if @wiki.save
+        flash[:notice] = "Your new Wiki was saved."
+        redirect_to @wiki
+      else
+        flash[:error] = "There was a problem saving the Wiki. Please try again."
+        redirect_to new_wiki_path
+      end
     else
-      flash[:error] = "Theree was a problem saving the Wiki. Please try again."
+      flash[:error] = "Standard users may not create private wikis."
+      redirect_to new_wiki_path
     end
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @user = current_user
     authorize @wiki
   end
 

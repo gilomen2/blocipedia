@@ -84,12 +84,39 @@
     <% end %>
     <h3>Change Your Account</h3>
     <% if current_user.standard? %>
-      <%= link_to 'Upgrade Account', upgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+        <%= form_tag charges_path, id: 'upgrade-button' do %>
+          <script src="https://checkout.stripe.com/checkout.js"
+          = hidden_field_tag 'stripeToken'
+          = hidden_field_tag 'stripeEmail'></script>
+          <button id="custom-button" class="btn btn-primary">Upgrade Account</button>
+
+           <script>
+              var handler = StripeCheckout.configure({
+              key: '<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>',
+              token: function(response) {
+                var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
+                var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
+                $("form").append(tokenInput).append(emailInput).submit();
+              }
+                });
+
+              document.getElementById('custom-button').addEventListener('click', function(e) {
+                // Open Checkout with further options
+                handler.open({
+                  name: 'Blocipedia',
+                  description: 'Premium Membership',
+                  amount: 1500
+                });
+                e.preventDefault();
+              });
+          </script>
+        <% end %>
     <% elsif current_user.premium? %>
-      <%= link_to 'Downgrade Account', downgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
+      <%= link_to 'Downgrade Account', downgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure? This will convert all your private wikis to public.' }, class: 'btn btn-warning' %>
     <% end %>
 
     <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
+
 
 
 
