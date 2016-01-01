@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+
 //
 $(document).ready(function(){
   $('input[type="file"]#avatar-upload-file-selector').change(function(){
@@ -31,4 +32,7 @@ $(document).ready(function(){
   var shortName = truncate(file.name, 4)
   $("#avatar-img").html(shortName);
   });
+  $("textarea#wysiwyg-editor").pagedownBootstrap();
 });
+
+

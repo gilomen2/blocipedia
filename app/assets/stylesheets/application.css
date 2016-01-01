@@ -47,3 +47,23 @@
 #upgrade-button {
   display: inline;
 }
+
+textarea.wmd-input {
+  min-height: 500px;
+  max-height: 500px;
+}
+
+.wmd-preview {
+  max-height: 500px;
+  min-height: 500px;
+  overflow: auto;
+  padding: 15px;
+}
+
+.wmd-button-bar {
+    margin: 3px 0;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+  background-color: #fafafa;
+}
