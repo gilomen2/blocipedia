@@ -1,5 +1,5 @@
 class WikiPolicy < ApplicationPolicy
   def show?
-     !record.private? || (record.private? && record.user_id == user.id)
+    user.admin? || !record.private? || (record.private? && record.user_id == user.id)
   end
 end
