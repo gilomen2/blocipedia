@@ -17,19 +17,15 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(params.required(:wiki).permit(:title, :body, :private))
+    @wiki = Wiki.new
+    @wiki.update_attributes(permitted_attributes(@wiki))
     @wiki.user = current_user
     authorize @wiki
-    if @wiki.valid?
-      if @wiki.save
-        flash[:notice] = "Your new Wiki was saved."
-        redirect_to @wiki
-      else
-        flash[:error] = "There was a problem saving the Wiki. Please try again."
-        redirect_to new_wiki_path
-      end
+    if @wiki.save
+      flash[:notice] = "Your new Wiki was saved."
+      redirect_to @wiki
     else
-      flash[:error] = "Standard users may not create private wikis."
+      flash[:error] = "There was a problem saving the Wiki. Please try again."
       redirect_to new_wiki_path
     end
   end
@@ -43,7 +39,7 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     authorize @wiki
-    if @wiki.update_attributes(params.required(:wiki).permit(:title, :body, :private))
+    if @wiki.update_attributes(permitted_attributes(@wiki))
       flash[:notice] = "Wiki has been updated."
       redirect_to @wiki
     else

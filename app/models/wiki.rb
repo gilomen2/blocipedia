@@ -1,9 +1,6 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
 
-  after_initialize :set_public
-
-  before_validation :disallow_private
 
   t = Wiki.arel_table
 
@@ -27,14 +24,6 @@ class Wiki < ActiveRecord::Base
     self.private == true
   end
 
-  private
-    def set_public
-      self.private ||= false
-    end
-    def disallow_private
-      if user.standard?
-        self.private == false
-      end
-    end
+
 
 end
