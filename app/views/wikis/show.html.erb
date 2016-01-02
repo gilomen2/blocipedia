@@ -10,7 +10,7 @@
 </div>
 <div class="col-md-4">
   <h3>Wiki Tools</h3>
-    <% if policy(@wiki).edit? %>
+  <% if policy(@wiki).edit? %>
     <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-default' %>
   <% end %>
   <% if policy(@wiki).destroy? %>
