@@ -1,21 +1,11 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
 
+  after_initialize :set_default
 
-  t = Wiki.arel_table
-
-  scope :visible_to, -> (user) {
-    if user
-      if user.admin?
-        Wiki.all
-      elsif t[:user_id].eq(user.id)
-        Wiki.where(t[:private].eq(false).or(t[:user_id].eq(user.id)))
-      end
-    else
-      Wiki.where(t[:private].eq(false))
-    end
-  }
-
+  def set_default
+    self.private = false if self.private.nil?
+  end
 
 
   scope :private_wikis, -> (user) { Wiki.where(t[:private].eq(true).and(t[:user_id].eq(user.id))) }
@@ -24,6 +14,7 @@ class Wiki < ActiveRecord::Base
     self.private == true
   end
 
-
-
+  def owner_of?
+    self.user_id = user.id
+  end
 end
