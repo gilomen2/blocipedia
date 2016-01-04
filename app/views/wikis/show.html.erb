@@ -13,5 +13,11 @@
   <% if policy(@wiki).destroy? %>
     <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this wiki?"} %>
   <% end %>
+  <%= render partial: "collaborators/collaboratorform", :locals => {:controller => 'collaborators', :action => 'create'} %>
+  <% if @collaborators %>
+    <ul class="collaborators">
+      <%= render partial: "collaborators/collaborator", collection: @collaborators %>
+    </ul>
+  <% end %>
 </div>
 

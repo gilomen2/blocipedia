@@ -1,13 +1,16 @@
+require 'will_paginate/array'
+
 class WikisController < ApplicationController
   def index
     @wikis = policy_scope(Wiki).paginate(page: params[:page], per_page: 20)
-    authorize @wikis
+    authorize Wiki
   end
 
   def show
     @wiki = Wiki.find(params[:id])
     @user = current_user
     authorize @wiki
+    @collaborators = Collaborator.where(wiki_id: @wiki.id)
   end
 
   def new

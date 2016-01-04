@@ -3,7 +3,7 @@ class WikiPolicy < ApplicationPolicy
     (user.present? && user.admin?) || !record.private? || (record.private? && record.user_id == user.id)
   end
   def permitted_attributes
-    if user.admin? || user.premium?
+    if user.admin? || (user.premium? && record.user_id == user.id)
       [:title, :body, :private]
     else
       [:title, :body]
@@ -18,14 +18,26 @@ class WikiPolicy < ApplicationPolicy
     end
 
     def resolve
+      wikis = []
       if user && user.admin?
-        scope.all
+        wikis = scope.all
       elsif user && user.premium?
-        t = Wiki.arel_table
-        scope.where(t[:private].eq(false).or(t[:user_id].eq(user.id)))
+        all_wikis = scope.all
+        all_wikis.each do |wiki|
+          if wiki.public? || wiki.user == user || wiki.users.include?(user)
+            wikis << wiki
+          end
+        end
       else
-        scope.where(:private => false)
+        all_wikis = scope.all
+        wikis = []
+        all_wikis.each do |wiki|
+          if wiki.public? || wiki.users.include?(user)
+            wikis << wiki
+          end
+        end
       end
+      wikis
     end
   end
 end
