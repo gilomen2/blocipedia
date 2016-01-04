@@ -62,7 +62,7 @@
             <%= f.hidden_field :avatar_cache %>
           </span>
           <% if current_user.avatar? %>
-          <%= link_to 'Remove Avatar', remove_avatar_path(current_user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %>
+          <%= link_to 'Remove Avatar', remove_avatar_path(current_user.id), method: :delete, data: { confirm: 'Please confirm that you want to remove your avatar.' }, class: 'btn btn-warning' %>
           <% end %>
         </div>
       </div>
@@ -112,10 +112,10 @@
           </script>
         <% end %>
     <% elsif current_user.premium? %>
-      <%= link_to 'Downgrade Account', downgrade_account_path(current_user.id), method: :put, data: { confirm: 'Are you sure? This will convert all your private wikis to public.' }, class: 'btn btn-warning' %>
+      <%= link_to 'Downgrade Account', downgrade_account_path(current_user.id), method: :put, data: { confirm: 'This will convert all your private wikis to public. Please confirm that you wish to proceed.' }, class: 'btn btn-warning' %>
     <% end %>
 
-    <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %>
+    <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Account deletion cannot be undone. Please confirm you wish to proceed." }, method: :delete, class: 'btn btn-danger' %>
 
 
 
