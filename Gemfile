@@ -60,6 +60,8 @@ gem 'redcarpet'
 
 gem 'will_paginate-bootstrap'
 
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
