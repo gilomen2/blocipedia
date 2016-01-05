@@ -1,7 +1,28 @@
 class WikiPolicy < ApplicationPolicy
   def show?
-    (user.present? && user.admin?) || !record.private? || (record.private? && record.user_id == user.id)
+    (user.present? && user.admin?) || !record.private? || (record.private? && record.user_id == user.id) || record.collaborators.where(user_id: user.id).exists?
   end
+
+  def edit?
+    show?
+  end
+
+  def update?
+    edit?
+  end
+
+  def create_collaborator?
+    user.admin? || user.premium? && record.user_id == user.id
+  end
+
+  def view_collaborators?
+    user.present? && (user.premium? && record.user_id == user.id || user.admin?) || record.collaborators.where(user_id: user.id)
+  end
+
+  def remove_collaborator?
+    user.admin? || user.premium? && record.user_id == user.id
+  end
+
   def permitted_attributes
     if user.admin? || (user.premium? && record.user_id == user.id)
       [:title, :body, :private]

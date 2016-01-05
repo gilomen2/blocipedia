@@ -10,6 +10,7 @@ class CollaboratorsController < ApplicationController
         @collaborator.user_id = @user_email.id
       end
     end
+    authorize @wiki, :create_collaborator?
     if @collaborator.save
       flash[:notice] = "Collaborator added successfully."
       redirect_to @wiki
@@ -22,6 +23,7 @@ class CollaboratorsController < ApplicationController
   def destroy
     @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.find(params[:id])
+    authorize @wiki, :remove_collaborator?
     if @collaborator.destroy
       flash[:notice] = "Collaborator successfully removed."
       redirect_to @wiki

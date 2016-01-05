@@ -14,14 +14,18 @@
     <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this wiki?"} %>
   <% end %>
   <div class="collaborators">
-    <%= render partial: "collaborators/collaboratorform", :controller => "collaborators" %>
+   <h5>Collaborators</h5>
+    <% if policy(@wiki).create_collaborator? %>
+      <%= render partial: "collaborators/collaboratorform", :controller => "collaborators" %>
+    <% end %>
     <% if @collaborators %>
-
-      <table class="table table-hover">
-        <tbody>
-          <%= render partial: "collaborators/collaborator", collection: @collaborators %>
-        </tbody>
-      </table>
+      <% if policy(@wiki).view_collaborators? %>
+        <table class="table table-hover">
+          <tbody>
+            <%= render partial: "collaborators/collaborator", collection: @collaborators %>
+          </tbody>
+        </table>
+      <% end %>
     <% end %>
   </div>
 
