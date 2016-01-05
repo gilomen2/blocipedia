@@ -30,7 +30,7 @@
 
 
         </div>
-        <% if @user.premium? && @wiki.user_id == @user.id || @user.admin? %>
+         <% if policy(@wiki).set_private? %>
           <div class="form-group">
             <%= f.label :private, class: 'col-lg-1 control-label' %>
             <div class="col-lg-10">

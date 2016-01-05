@@ -12,19 +12,23 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def create_collaborator?
-    user.admin? || user.premium? && record.user_id == user.id
+    record.private? && (user.present? && (user.premium? && record.user_id == user.id || user.admin?))
   end
 
   def view_collaborators?
-    user.present? && (user.premium? && record.user_id == user.id || user.admin?) || record.collaborators.where(user_id: user.id)
+    record.private? && (user.present? && (user.premium? && record.user_id == user.id || user.admin?) || record.collaborators.where(user_id: user.id))
   end
 
   def remove_collaborator?
-    user.admin? || user.premium? && record.user_id == user.id
+    (user.present? && user.admin?) || (user.present? && user.premium?) && record.user_id == user.id
+  end
+
+  def set_private?
+    (user.present? && user.admin?) || (user.present? && user.premium?) && record.user_id == user.id
   end
 
   def permitted_attributes
-    if user.admin? || (user.premium? && record.user_id == user.id)
+    if (user.present? && user.admin?) || (user.present? && user.premium?) && record.user_id == user.id
       [:title, :body, :private]
     else
       [:title, :body]

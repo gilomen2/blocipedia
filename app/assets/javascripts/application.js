@@ -16,10 +16,13 @@
 //= require bootstrap-sprockets
 //= require formvalidation.min
 //= require formvalidation/framework/bootstrap.min
+//= require data-confirm-modal
 //= require_tree .
 
 //
-$(document).ready(function(){
+var ready;
+ready = function() {
+  $("textarea#wysiwyg-editor").pagedownBootstrap();
   $('input[type="file"]#avatar-upload-file-selector').change(function(){
     var file = this.files[0];
     function truncate(n, len) {
@@ -56,6 +59,10 @@ $(document).ready(function(){
             }
         }
     })
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
 
 
