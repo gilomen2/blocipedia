@@ -18,7 +18,9 @@
 //= require_tree .
 
 //
-$(document).ready(function(){
+var ready;
+ready = function() {
+  $("textarea#wysiwyg-editor").pagedownBootstrap();
   $('input[type="file"]#avatar-upload-file-selector').change(function(){
     var file = this.files[0];
     function truncate(n, len) {
@@ -33,7 +35,10 @@ $(document).ready(function(){
   var shortName = truncate(file.name, 4)
   $("#avatar-img").html(shortName);
   });
-  $("textarea#wysiwyg-editor").pagedownBootstrap();
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
 
 
