@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require formvalidation.min
+//= require formvalidation/framework/bootstrap.min
 //= require_tree .
 
 //
@@ -33,6 +35,27 @@ $(document).ready(function(){
   $("#avatar-img").html(shortName);
   });
   $("textarea#wysiwyg-editor").pagedownBootstrap();
+  $('#add-collaborator')
+    .formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'collaborator[email]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            }
+        }
+    })
 });
 
 

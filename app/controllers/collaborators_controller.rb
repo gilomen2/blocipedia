@@ -3,9 +3,12 @@ class CollaboratorsController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.new(collaborator_params)
     @collaborator.wiki_id = @wiki.id
-    # @collaborator.user_id = User.find_by(email: @collaborator.email).id
-    if User.find_by(email: @collaborator.email)
-      @collaborator.user_id = User.find_by(email: @collaborator.email).id
+    @user_email = User.find_by(email: @collaborator.email)
+    if @user_email
+      # Prevent wiki owner from adding themselves as a collaborator
+      unless @user_email.id == @wiki.user.id
+        @collaborator.user_id = @user_email.id
+      end
     end
     if @collaborator.save
       flash[:notice] = "Collaborator added successfully."
@@ -28,10 +31,6 @@ class CollaboratorsController < ApplicationController
     end
   end
 
-  def look_up_id
-    raise
-
-  end
 
   private
 

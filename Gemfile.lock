@@ -198,6 +198,9 @@ GEM
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
+    formvalidation-rails (0.7.0)
+      jquery-rails (>= 3.0)
+      railties (>= 3.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     http-cookie (1.0.2)
@@ -253,8 +256,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
-    rails4-autocomplete (1.1.1)
-      rails (>= 3.0)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -342,6 +343,7 @@ DEPENDENCIES
   figaro
   fog
   font-awesome-rails
+  formvalidation-rails
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick
@@ -349,7 +351,6 @@ DEPENDENCIES
   pundit
   quiet_assets
   rails (= 4.2.3)
-  rails4-autocomplete
   rails_12factor
   redcarpet
   sass-rails (~> 5.0)

@@ -1,9 +1,8 @@
-<div id="collaborators">
-  <h5>Collaborators</h5>
-  <%= form_for [@wiki, @collaborator], :html => {:class => 'form-inline'}  do |f| %>
-    <div class="form-group">
-      <%= f.text_field :email, autofocus: true, class: 'form-control', placeholder: 'User email' %>
-    </div>
-    <%= f.submit "Add", class: 'btn btn-primary' %>
-  <% end %>
-</div>
+<h5>Collaborators</h5>
+<%= form_for [@wiki, @collaborator], :html => {:class => 'form-inline', :id => 'add-collaborator'}  do |f| %>
+  <div class="form-group">
+    <%= f.text_field :email, autofocus: true, class: 'form-control', placeholder: 'User email' %>
+  </div>
+  <%= f.submit "Add", class: 'btn btn-primary' %>
+<% end %>
+
