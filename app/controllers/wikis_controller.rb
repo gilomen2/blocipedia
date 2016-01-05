@@ -11,6 +11,7 @@ class WikisController < ApplicationController
     @user = current_user
     authorize @wiki
     @collaborators = Collaborator.where(wiki_id: @wiki.id)
+    @collaborator = @wiki.collaborators.build
   end
 
   def new

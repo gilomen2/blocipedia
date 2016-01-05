@@ -1,6 +1,6 @@
 <div id="collaborators">
   <h5>Collaborators</h5>
-  <% form_for [@wiki, @collaborator] do |f| %>
+  <%= form_for [@wiki, @collaborator], :html => {:class => 'form-inline'}  do |f| %>
     <div class="form-group">
       <%= f.text_field :user_id, autofocus: true, class: 'form-control' %>
     </div>
