@@ -35,6 +35,8 @@ ready = function() {
   var shortName = truncate(file.name, 4)
   $("#avatar-img").html(shortName);
   });
+  $('.jumbotron').after('Test')
+
 };
 
 $(document).ready(ready);
