@@ -1,9 +1,6 @@
 <div class="col-md-8">
   <h1><%= @wiki.title %></h1>
   <p><em>Created by: <%= @wiki.user.name %></em></p>
-  <% if @wiki.private? %>
-    <p>PRIVATE</p>
-  <% end %>
 
 
   <p><%= markdown_to_html @wiki.body %></p>
