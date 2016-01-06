@@ -16,6 +16,7 @@
 
 /*
  *= require font-awesome
+ *= require formvalidation.min
  */
 
 @import "bootstrap-sprockets";
@@ -66,4 +67,12 @@ textarea.wmd-input {
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
   background-color: #fafafa;
+}
+
+.no-border {
+  border:none !important;
+}
+
+.collaborators {
+  margin: 30px 0px;
 }

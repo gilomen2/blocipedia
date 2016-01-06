@@ -1,0 +1,8 @@
+<tr>
+  <td class="no-border">
+    <% if policy(@wiki).remove_collaborator? %>
+      <%= link_to ("<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>").html_safe, wiki_collaborator_path(@wiki, collaborator), action: "destroy", method: :delete, class: 'text-danger' %>
+    <% end %>
+    <%= collaborator.user.name %>
+  </td>
+</tr>

@@ -6,6 +6,11 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
 
   has_many :wikis
+  has_many :collaborators
+  has_many :users, through: :collaborators
+
+  delegate :wikis, to: :collaborators
+
   after_initialize :set_role
 
   def set_role
@@ -23,6 +28,11 @@ class User < ActiveRecord::Base
   def admin?
     role == 'admin'
   end
+
+  def collaborators
+    Collaborator.where(user_id: id)
+  end
+
 
   mount_uploader :avatar, AvatarUploader
 end

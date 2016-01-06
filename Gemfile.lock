@@ -205,6 +205,9 @@ GEM
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
+    formvalidation-rails (0.7.0)
+      jquery-rails (>= 3.0)
+      railties (>= 3.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     http-cookie (1.0.2)
@@ -348,6 +351,7 @@ DEPENDENCIES
   figaro
   fog
   font-awesome-rails
+  formvalidation-rails
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick

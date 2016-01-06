@@ -6,12 +6,32 @@
   <p><%= markdown_to_html @wiki.body %></p>
 </div>
 <div class="col-md-4">
-  <h3>Wiki Tools</h3>
-  <% if policy(@wiki).edit? %>
-    <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-default' %>
+  <% if policy(@wiki).edit? || policy(@wiki).destroy? %>
+    <h3>Wiki Tools</h3>
+    <% if policy(@wiki).edit? %>
+      <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-default' %>
+    <% end %>
+    <% if policy(@wiki).destroy? %>
+      <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: "Deleting wikis is not reversible. Do you want to proceed?"} %>
+    <% end %>
   <% end %>
-  <% if policy(@wiki).destroy? %>
-    <%= link_to "Delete", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this wiki?"} %>
+  <% if policy(@wiki).create_collaborator? || policy(@wiki).view_collaborators? %>
+    <div class="collaborators">
+     <h5>Collaborators</h5>
+      <% if policy(@wiki).create_collaborator? %>
+        <%= render partial: "collaborators/collaboratorform", :controller => "collaborators" %>
+      <% end %>
+      <% if @collaborators %>
+        <% if policy(@wiki).view_collaborators? %>
+          <table class="table table-hover">
+            <tbody>
+              <%= render partial: "collaborators/collaborator", collection: @collaborators %>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
+
 </div>
 
