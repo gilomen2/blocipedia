@@ -3,28 +3,27 @@ require 'will_paginate/array'
 class WikisController < ApplicationController
   def index
     @wikis = policy_scope(Wiki).paginate(page: params[:page], per_page: 20)
-    authorize Wiki
   end
 
   def show
     @wiki = Wiki.find(params[:id])
-    @user = current_user
     authorize @wiki
-    @collaborators = Collaborator.where(wiki_id: @wiki.id)
-    @collaborator = @wiki.collaborators.build
+    @user = current_user
+    @collaborators = @wiki.collaborators
+    @collaborator  = @wiki.collaborators.build
   end
 
   def new
     @wiki = Wiki.new
-    @user = current_user
     authorize @wiki
+    @user = current_user
   end
 
   def create
     @wiki = Wiki.new
+    authorize @wiki
     @wiki.update_attributes(permitted_attributes(@wiki))
     @wiki.user = current_user
-    authorize @wiki
     if @wiki.save
       flash[:notice] = "Your new Wiki was saved."
       redirect_to @wiki
@@ -36,8 +35,8 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    @user = current_user
     authorize @wiki
+    @user = current_user
   end
 
   def update
