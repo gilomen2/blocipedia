@@ -3,8 +3,7 @@ class CollaboratorsController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.new(collaborator_params)
     @collaborator.wiki_id = @wiki.id
-    @user_by_email = User.find_by(email: @collaborator.email)
-    !@user_by_email.nil? ? @collaborator.user_id = @user_by_email.id : @collaborator.user_id = nil
+    @collaborator.user_id = @collaborator.user_by_email
     authorize @wiki, :create_collaborator?
     if @collaborator.save
       flash[:notice] = "Collaborator added successfully."
