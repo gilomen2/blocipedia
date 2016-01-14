@@ -4,12 +4,7 @@ class CollaboratorsController < ApplicationController
     @collaborator = Collaborator.new(collaborator_params)
     @collaborator.wiki_id = @wiki.id
     @user_email = User.find_by(email: @collaborator.email)
-    if @user_email
-      # Prevent wiki owner from adding themselves as a collaborator
-      unless @user_email.id == @wiki.user.id
-        @collaborator.user_id = @user_email.id
-      end
-    end
+    @collaborator.user_id = @user_email.id
     authorize @wiki, :create_collaborator?
     if @collaborator.save
       flash[:notice] = "Collaborator added successfully."
