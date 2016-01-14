@@ -3,13 +3,13 @@ class CollaboratorsController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @collaborator = Collaborator.new(collaborator_params)
     @collaborator.wiki_id = @wiki.id
-    @user_email = User.find_by(email: @collaborator.email)
-    !@user_email.nil? ? @collaborator.user_id = @user_email.id : @collaborator.user_id = nil
+    @user_by_email = User.find_by(email: @collaborator.email)
+    !@user_by_email.nil? ? @collaborator.user_id = @user_by_email.id : @collaborator.user_id = nil
     authorize @wiki, :create_collaborator?
     if @collaborator.save
       flash[:notice] = "Collaborator added successfully."
     else
-      flash[:error] = "There was a problem adding the collaborator. Please try again."
+      flash[:error] = @collaborator.errors.full_messages.to_sentence
     end
     redirect_to @wiki
   end
