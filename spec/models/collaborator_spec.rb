@@ -5,12 +5,22 @@ RSpec.describe Collaborator, :type => :model do
     expect(Collaborator).not_to be_nil
   end
 
-  # context "with 2 or more comments" do
-  #   it "orders them in reverse chronologically" do
-  #     post = Collaborator.create!
-  #     comment1 = post.comments.create!(:body => "first comment")
-  #     comment2 = post.comments.create!(:body => "second comment")
-  #     expect(post.reload.comments).to eq([comment2, comment1])
-  #   end
-  # end
+  it 'can be created with a wiki and a user' do
+    wiki_id = 123
+    user_id = 99
+
+    collaborator = Collaborator.new(wiki_id: wiki_id, user_id: user_id)
+
+    expect(collaborator).to be_valid
+  end
+
+  it 'is not valid when the user is the owner' do
+    user = User.new(email: 'someone@something.com', name: 'Bob', password: 'whatever')
+    user.skip_confirmation!
+    user.save!
+    wiki = Wiki.create!(user_id: user.id)
+
+    collaborator = Collaborator.new(wiki_id: wiki.id, user_id: user.id)
+    expect(collaborator).not_to be_valid
+  end
 end
