@@ -29,4 +29,7 @@ class Wiki < ActiveRecord::Base
     Collaborator.where(wiki_id: id)
   end
 
+  def owner_name
+    self.user.name
+  end
 end

@@ -13,17 +13,16 @@ class CollaboratorsController < ApplicationController
     authorize @wiki, :create_collaborator?
     if @collaborator.save
       flash[:notice] = "Collaborator added successfully."
-      redirect_to @wiki
     else
       flash[:error] = "There was a problem adding the collaborator. Please try again."
-      redirect_to @wiki
     end
+    redirect_to @wiki
   end
 
   def destroy
     @wiki = Wiki.find(params[:wiki_id])
-    @collaborator = Collaborator.find(params[:id])
     authorize @wiki, :remove_collaborator?
+    @collaborator = Collaborator.find(params[:id])
     if @collaborator.destroy
       flash[:notice] = "Collaborator successfully removed."
       redirect_to @wiki
@@ -39,5 +38,4 @@ class CollaboratorsController < ApplicationController
   def collaborator_params
     params.require(:collaborator).permit(:wiki_id, :user_id, :email)
   end
-
 end
