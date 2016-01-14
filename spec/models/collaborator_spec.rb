@@ -1,0 +1,16 @@
+require "rails_helper"
+
+RSpec.describe Collaborator, :type => :model do
+  it 'can load the class' do
+    expect(Collaborator).not_to be_nil
+  end
+
+  # context "with 2 or more comments" do
+  #   it "orders them in reverse chronologically" do
+  #     post = Collaborator.create!
+  #     comment1 = post.comments.create!(:body => "first comment")
+  #     comment2 = post.comments.create!(:body => "second comment")
+  #     expect(post.reload.comments).to eq([comment2, comment1])
+  #   end
+  # end
+end
