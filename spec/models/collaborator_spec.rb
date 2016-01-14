@@ -24,4 +24,11 @@ RSpec.describe Collaborator, :type => :model do
 
     expect(collaborator).not_to be_valid
   end
+
+  it 'is not valid when the user does not exist' do
+    wiki = Wiki.create!(user: @user)
+    collaborator = Collaborator.new(wiki: wiki, user: nil)
+
+    expect(collaborator).not_to be_valid
+  end
 end

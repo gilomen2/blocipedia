@@ -1,7 +1,7 @@
 class Collaborator < ActiveRecord::Base
   belongs_to :user
   belongs_to :wiki
-  before_save :check_user_exists?
+  before_save :user_exists?
   validates_uniqueness_of :user_id, scope: :wiki_id
   validates_presence_of :user_id, scope: :wiki_id
   validate :user_is_not_owner
@@ -20,10 +20,14 @@ class Collaborator < ActiveRecord::Base
   end
 
   def user
-    User.find(user_id)
+    if user_id == nil
+      nil
+    else
+      User.find(user_id)
+    end
   end
 
-  def check_user_exists?
+  def user_exists?
     User.exists?(self.user_id)
   end
 
