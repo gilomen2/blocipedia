@@ -1,10 +1,7 @@
 class Collaborator < ActiveRecord::Base
   belongs_to :user
   belongs_to :wiki
-  before_save :check_user_exists?
-  validates_uniqueness_of :user_id, scope: :wiki_id
-  validates_presence_of :user_id, scope: :wiki_id
-  validate :user_is_not_owner
+  validate :user_is_not_owner, :collaborator_is_a_user, :already_collaborator
 
 
   def self.users
@@ -23,17 +20,37 @@ class Collaborator < ActiveRecord::Base
     User.find(user_id)
   end
 
-  def check_user_exists?
-    User.exists?(self.user_id)
+  def user_by_email
+    User.find_by(email: self.email)
+  end
+
+  def user_exists?
+    User.exists?(user_by_email)
   end
 
   def is_owner?
-    wiki.user == user
+    wiki.user == user_by_email
+  end
+
+  def is_collaborator?
+    wiki.collaborators.where(user_id: self.user_by_email).count > 0
   end
 
   def user_is_not_owner
     if is_owner?
-      errors.add(:user, "Can't be the wiki's owner")
+      errors.add(:collaborator, "can't be the wiki's owner")
+    end
+  end
+
+  def collaborator_is_a_user
+    if !user_exists?
+      errors.add(:user, "does not exist")
+    end
+  end
+
+  def already_collaborator
+    if is_collaborator?
+      errors.add(:user, "is already a collaborator")
     end
   end
 end
