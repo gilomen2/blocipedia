@@ -21,11 +21,7 @@ class Collaborator < ActiveRecord::Base
   end
 
   def user_by_email
-    if User.find_by(email: self.email)
-      User.find_by(email: self.email).id
-    else
-      nil
-    end
+    User.find_by(email: self.email)
   end
 
   def user_exists?
@@ -33,7 +29,7 @@ class Collaborator < ActiveRecord::Base
   end
 
   def is_owner?
-    wiki.user.id == user_by_email
+    wiki.user == user_by_email
   end
 
   def is_collaborator?

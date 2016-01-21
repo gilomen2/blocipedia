@@ -12,7 +12,11 @@ RSpec.describe Collaborator, :type => :model do
   end
 
   it 'can be created with a wiki and a user' do
-    wiki = Wiki.create!(user_id: 999)
+    @user2 = User.new(email: 'someone2@something.com', name: 'Bill', password: 'whatever')
+    @user2.skip_confirmation!
+    @user2.save!
+
+    wiki = Wiki.create!(user: @user2)
     collaborator = Collaborator.new(wiki: wiki, user: @user)
 
     expect(collaborator).to be_valid
