@@ -17,7 +17,7 @@ RSpec.describe Collaborator, :type => :model do
     @user2.save!
 
     wiki = Wiki.create!(user: @user2)
-    collaborator = Collaborator.new(wiki: wiki, user: @user)
+    collaborator = Collaborator.new(wiki: wiki, user: @user, email: @user.email)
 
     expect(collaborator).to be_valid
   end
