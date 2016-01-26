@@ -25,10 +25,26 @@
   padding-top: 20px;
 }
 
+.twenty {
+  padding: 20px;
+}
+
+.forty {
+  padding: 40px;
+}
+
+.sixty {
+  padding: 60px;
+}
+
 #avatar-img {
     min-width: 85px;
     display: inline-block;
     text-align: center;
+}
+
+.navbar {
+  margin-bottom: 0;
 }
 
 
@@ -75,4 +91,34 @@ textarea.wmd-input {
 
 .collaborators {
   margin: 30px 0px;
+}
+
+
+/*homepage image*/
+
+html,body {
+  height:100%;width:100%;
+}
+.jumbotron {
+  background: rgba(255, 255, 255, 0.2);
+}
+.container-full-bg {
+  width:100%;
+  height:100%;
+  max-width:100%;
+  background-position:center;
+  background-size:cover;
+}
+
+.container.special .jumbotron {
+  margin-top:30px;
+}
+
+.big-icon {
+  font-size: 55px;
+  color: #007196;
+}
+
+.light-gray {
+  background: #e4e4e4;
 }

@@ -1,5 +1,38 @@
-<div class="jumbotron">
-  <h1>Welcome</h1>
-  <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+<div class="row">
+  <div class="container-full-bg" style="background-image:url('/assets/blur.jpeg');">
+    <div class="container special">
+      <div class="jumbotron">
+        <h1>Let's collaborate</h1>
+        <p>Blocipedia makes it easy to collaborate on content worth sharing. Create wikis and invite others to weigh in.</p>
+        <p><%= link_to "Get Started", new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
+      </div>
+    </div>
+  </div>
+
 </div>
+<div class="row">
+  <div class="container sixty">
+
+    <div class="col-md-4 text-center">
+      <span class="glyphicon glyphicon-eye-close big-icon" aria-hidden="true"></span>
+      <h3>Control Access</h3>
+      <p>With private wikis, you control who can view and collaborate.</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <span class="glyphicon glyphicon-education big-icon" aria-hidden="true"></span>
+      <h3>Spread Knowledge</h3>
+      <p>Write about any topic and let others share what they know.</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <span class="glyphicon glyphicon-pencil big-icon" aria-hidden="true"></span>
+      <h3>Better Editing</h3>
+      <p>Write and edit posts in Markdown with helpful WYSIWYG controls.</p>
+    </div>
+
+  </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom light-gray">
+  <div class="container twenty text-center">
+    <p>Project by Beth Gilomen available on <a href="https://github.com/gilomen2/blocipedia">GitHub</a></p>
+  </div>
+</nav>
